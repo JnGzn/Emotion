@@ -18,7 +18,8 @@ namespace EmotionWEB.Controllers
         // GET: Emotions
         public ActionResult Index()
         {
-            return View(db.Emotions.ToList());
+            var emotions = db.Emotions.Include(e => e.faces);
+            return View(emotions.ToList());
         }
 
         // GET: Emotions/Details/5
@@ -39,6 +40,7 @@ namespace EmotionWEB.Controllers
         // GET: Emotions/Create
         public ActionResult Create()
         {
+            ViewBag.FaceId = new SelectList(db.Faces, "Id", "Id");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace EmotionWEB.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Score")] Emotion emotion)
+        public ActionResult Create([Bind(Include = "Id,emotionType,Score,FaceId")] Emotion emotion)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace EmotionWEB.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.FaceId = new SelectList(db.Faces, "Id", "Id", emotion.FaceId);
             return View(emotion);
         }
 
@@ -71,6 +74,7 @@ namespace EmotionWEB.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FaceId = new SelectList(db.Faces, "Id", "Id", emotion.FaceId);
             return View(emotion);
         }
 
@@ -79,7 +83,7 @@ namespace EmotionWEB.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Score")] Emotion emotion)
+        public ActionResult Edit([Bind(Include = "Id,emotionType,Score,FaceId")] Emotion emotion)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace EmotionWEB.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.FaceId = new SelectList(db.Faces, "Id", "Id", emotion.FaceId);
             return View(emotion);
         }
 

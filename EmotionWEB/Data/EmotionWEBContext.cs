@@ -16,8 +16,11 @@ namespace EmotionWEB.Data
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public EmotionWEBContext() : base("name=EmotionWEBContext")
+        public EmotionWEBContext() : base("name=EmotionWEBAzure")
         {
+            Database.SetInitializer<EmotionWEBContext>(
+                new DropCreateDatabaseIfModelChanges<EmotionWEBContext>()
+                ); ;
         }
 
         public DbSet<Picture> Pictures { get; set; }

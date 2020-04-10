@@ -1,6 +1,6 @@
 ﻿namespace EmotionWEB.Models
 {
-    internal enum EmotionEnum
+    public enum EmotionEnum
     {
         anger,
         contempt,

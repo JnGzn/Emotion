@@ -12,6 +12,12 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.faces.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emotionType)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Score)
         </th>
         <th></th>
@@ -19,6 +25,12 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.faces.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emotionType)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Score)
         </td>

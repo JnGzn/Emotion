@@ -10,11 +10,14 @@ namespace EmotionWEB.Models
         int id;
         float score;
         int faceId;
-        EmotionEnum emotionType;
+
         public virtual Face faces { get; set; }
+        public EmotionEnum emotionType { get; set; }
         
         public int Id { get => id; set => id = value; }
         public float Score { get => score; set => score = value; }
-        internal EmotionEnum EmotionType { get => emotionType; set => emotionType = value; }
+        public int FaceId { get => faceId; set => faceId = value; }
+       
+
     }
 }
